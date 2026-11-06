@@ -1,0 +1,20 @@
+venv\Scripts\activate.bat
+
+
+python -m venv venv
+venv\Scripts\activate.bat
+PS C:\Users\HP\Desktop\trabajo-simulador-integrales> venv\Scripts\activate.batvenv\Scripts\activate.bat(Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned) ; (& c:\Users\HP\Desktop\trabajo-simulador-integrales\venv\Scripts\Activate.ps1)
+pip install django sympy numpy scipy
+
+django-admin startproject config .
+
+python manage.py runserver
+
+http://127.0.0.1:8000/
+
+pip freeze > requirements.txt
+
+python manage.py startapp visualizador
+python manage.py startapp integrales
+python manage.py startapp visualizador
+ python manage.py startapp evaluacion  
