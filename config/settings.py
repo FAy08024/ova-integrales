@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'integrales',
     'visualizador',
     'lecciones',
+    'simulador',
+    'evaluacion',
 ]
 
 MIDDLEWARE = [

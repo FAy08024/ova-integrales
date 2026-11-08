@@ -1,0 +1,62 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}OVA Integrales Multiples{% endblock %}</title>
+
+    <link rel="stylesheet"
+          href="{% static 'lecciones/css/estilos.css' %}">
+</head>
+
+<body>
+
+    <header class="encabezado">
+        <div class="contenedor-header">
+
+            <h1 class="logo-ova">OVA Integrales</h1>
+
+              
+<nav class="menu" aria-label="Navegación principal">
+
+    <a href="#inicio">Inicio</a>
+
+    <div class="menu-desplegable">
+        <button class="boton-desplegable" type="button">
+            Teoría ▾
+        </button>
+
+        <div class="submenu">
+            <a href="#teoria">Integrales dobles y Fubini</a>
+            <a href="#regiones">Regiones Tipo I y II</a>
+            <a href="#polares">Coordenadas polares</a>
+            <a href="#masa">Masa y centro de masa</a>
+            <a href="#triples">Integrales triples</a>
+            <a href="#simulador">Simulador interactivo</a>
+        </div>
+    </div>
+
+    <a href="#evaluacion">Evaluación</a>
+
+</nav>
+
+
+        </div>
+    </header>
+
+    <main class="contenido-principal">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="pie-pagina">
+        <p>OVA Integrales Multiples</p>
+        <p>Proyecto de Cálculo Multivariable</p>
+    </footer>
+
+</body>
+</html>

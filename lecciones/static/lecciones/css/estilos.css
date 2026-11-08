@@ -1,0 +1,242 @@
+
+/* ==============================
+   ESTILOS GENERALES
+============================== */
+
+:root {
+    --azul-principal: #1456A0;
+    --azul-oscuro: #103B70;
+    --azul-claro: #EAF3FF;
+    --blanco: #FFFFFF;
+    --fondo: #F5F8FC;
+    --texto: #243247;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--fondo);
+    color: var(--texto);
+    line-height: 1.6;
+}
+
+/* ==============================
+   ENCABEZADO FIJO AL SCROLL
+============================== */
+
+.encabezado {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    width: 100%;
+    background-color: var(--azul-principal);
+    color: var(--blanco);
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+}
+
+.contenedor-header {
+    max-width: 1200px;
+    margin: auto;
+    padding: 14px 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.logo-ova {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--blanco);
+}
+
+/* ==============================
+   MENÚ DE NAVEGACIÓN
+============================== */
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.menu a {
+    color: var(--blanco);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+
+    padding: 9px 16px;
+    border-radius: 7px;
+
+    transition: background-color 0.2s ease;
+}
+
+.menu a:hover,
+.menu a:focus-visible {
+    background-color: rgba(255, 255, 255, 0.18);
+}
+
+.menu a:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
+}
+
+/* ==============================
+   CONTENIDO PRINCIPAL
+============================== */
+
+.contenido-principal {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 36px 24px;
+}
+
+.contenido-principal section {
+    scroll-margin-top: 100px;
+    margin-bottom: 35px;
+    padding: 35px;
+
+    background-color: var(--blanco);
+    border: 1px solid #E1E8F0;
+    border-radius: 12px;
+}
+
+h2 {
+    color: var(--azul-oscuro);
+}
+
+h3 {
+    color: var(--azul-principal);
+}
+
+/* ==============================
+   PIE DE PÁGINA
+============================== */
+
+.pie-pagina {
+    background: var(--azul-oscuro);
+    color: var(--blanco);
+    padding: 20px;
+    text-align: center;
+}
+
+/* ==============================
+   DISEÑO RESPONSIVE
+============================== */
+
+@media (max-width: 700px) {
+    .contenedor-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .menu {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .menu a {
+        padding: 7px 10px;
+        font-size: 14px;
+    }
+
+    html {
+        scroll-padding-top: 145px;
+    }
+
+    .contenido-principal {
+        padding: 20px 12px;
+    }
+
+    .contenido-principal section {
+        padding: 22px 16px;
+        scroll-margin-top: 145px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+
+/* MENÚ DESPLEGABLE */
+
+.menu-desplegable {
+    position: relative;
+}
+
+.boton-desplegable {
+    background: transparent;
+    color: white;
+    border: none;
+    padding: 9px 16px;
+    font-size: 15px;
+    font-family: inherit;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+.boton-desplegable:hover,
+.menu-desplegable:focus-within .boton-desplegable {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 250px;
+    padding: 8px;
+
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16);
+    z-index: 1100;
+}
+
+.submenu a {
+    display: block;
+    color: #103B70;
+    padding: 10px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.submenu a:hover,
+.submenu a:focus-visible {
+    background: #EAF3FF;
+    color: #1456A0;
+}
+
+/* Abrir con mouse o teclado */
+.menu-desplegable:hover .submenu,
+.menu-desplegable:focus-within .submenu {
+    display: block;
+}
+
+@media (max-width: 700px) {
+    .submenu {
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 230px;
+        max-width: 90vw;
+    }
+}

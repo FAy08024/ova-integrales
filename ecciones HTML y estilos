@@ -1,0 +1,23 @@
+ config/settings.py                                 |   2 [32m+[m
+ config/urls.py                                     |   7 [32m+[m
+ .../index.html => evaluacion/formulario.html}      |   0
+ evaluacion/views.py                                |   3 [32m+[m[31m-[m
+ lecciones/static/lecciones/css/estilos.css         | 242 [32m+++++++++++++++++++++[m
+ lecciones/templates/lecciones/base.html            |  62 [32m++++++[m
+ lecciones/templates/lecciones/inicio.html          |  50 [32m+++++[m
+ .../{index.html => secciones/fubini.html}          |   0
+ .../lecciones/secciones/integrales_triples.html    |   0
+ .../lecciones/secciones/introduccion.html          |   0
+ .../templates/lecciones/secciones/masa_centro.html |   0
+ .../templates/lecciones/secciones/polares.html     |   0
+ .../templates/lecciones/secciones/regiones.html    |   0
+ lecciones/views.py                                 |   3 [32m+[m[31m-[m
+ simulador/__init__.py                              |   0
+ simulador/admin.py                                 |   3 [32m+[m
+ simulador/apps.py                                  |   5 [32m+[m
+ simulador/migrations/__init__.py                   |   0
+ simulador/models.py                                |   3 [32m+[m
+ simulador/templates/simulador/PANEL.html           |   0
+ simulador/tests.py                                 |   3 [32m+[m
+ simulador/views.py                                 |   4 [32m+[m
+ 22 files changed, 385 insertions(+), 2 deletions(-)
