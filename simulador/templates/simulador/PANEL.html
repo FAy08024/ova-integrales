@@ -1,0 +1,28 @@
+
+{% load static %}
+
+<link rel="stylesheet"
+      href="{% static 'simulador/css/simulador.css' %}">
+
+<div class="panel-visualizador">
+    <h2>Visualización matemática</h2>
+
+    <p>Gráfica 2D de la función introducida.</p>
+
+    <div id="grafica-2d"></div>
+
+    <h3>Visualizador 3D</h3>
+    <div id="escena3d">
+        Próximamente
+    </div>
+</div>
+
+{% load static %}
+
+<script defer
+    src="https://cdn.plot.ly/plotly-4.1.1.min.js">
+</script>
+
+<script defer
+    src="{% static 'simulador/js/calculadora.js' %}">
+</script>

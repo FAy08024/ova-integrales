@@ -240,3 +240,58 @@ h3 {
         max-width: 90vw;
     }
 }
+
+/* INTRODUCCIÓN DEL OVA */
+
+.introduccion {
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.etiqueta-seccion {
+    display: inline-block;
+    color: #1456A0;
+    background: #EAF3FF;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.introduccion h2 {
+    font-size: 34px;
+    color: #103B70;
+    margin-bottom: 16px;
+}
+
+.introduccion p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #475569;
+}
+
+.introduccion h3 {
+    margin-top: 25px;
+    color: #1456A0;
+}
+
+.introduccion li {
+    margin-bottom: 9px;
+}
+
+.boton-ova {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 12px 22px;
+    background: #1456A0;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.boton-ova:hover {
+    background: #103B70;
+}
