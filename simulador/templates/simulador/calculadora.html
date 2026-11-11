@@ -4,8 +4,8 @@
     <h2>Calculadora de Integrales Múltiples</h2>
 
     <p>
-        Introduce una función y sus límites para
-        calcular una integral doble.
+        Analiza la distribución de señal Wi-Fi en un salón
+        mediante integrales dobles y el teorema de Fubini.
     </p>
 
     <form id="form-calculadora"
@@ -14,16 +14,24 @@
 
         {% csrf_token %}
 
+        <!-- TIPO DE INTEGRAL -->
         <div class="campo">
-            <label for="tipo-integral">Tipo de integral</label>
+            <label for="tipo-integral">
+                Tipo de integral
+            </label>
+
             <select id="tipo-integral" name="tipo">
-                <option value="doble">Integral doble</option>
+                <option value="doble">
+                    Integral doble
+                </option>
+
                 <option value="triple" disabled>
                     Integral triple (próximamente)
                 </option>
             </select>
         </div>
 
+        <!-- SISTEMA DE COORDENADAS -->
         <div class="campo">
             <label for="coordenadas">
                 Sistema de coordenadas
@@ -33,100 +41,250 @@
                 <option value="cartesianas">
                     Cartesianas
                 </option>
+
                 <option value="polares" disabled>
                     Polares (próximamente)
                 </option>
+
                 <option value="cilindricas" disabled>
                     Cilíndricas (próximamente)
                 </option>
+
                 <option value="esfericas" disabled>
                     Esféricas (próximamente)
                 </option>
             </select>
         </div>
 
+        <!-- FUNCIÓN MATEMÁTICA -->
         <div class="campo">
-            <label for="funcion">Función f(x,y)</label>
+
+            <label for="funcion">
+                Función S(x,y) - Señal Wi-Fi
+            </label>
 
             <input
                 type="text"
                 id="funcion"
                 name="funcion"
-                value="x**2 + y**2"
-                placeholder="Ej: x**2 + y**2"
+                value="-40-(x-5)**2-(y-4)**2"
+                placeholder="Ej: -40-(x-5)**2-(y-4)**2"
                 maxlength="100"
                 required
             >
 
             <small>
-                Usa ** para potencias.
-                Ejemplo: x**2 + y**2
+                La función representa un modelo hipotético
+                de intensidad de señal en dBm.
+                Utiliza ** para las potencias.
             </small>
+
         </div>
 
+        <!-- CONTROLES DE POSICIÓN DEL ROUTER -->
+        <div class="controles-router">
+
+            <h3>Ubicación del router Wi-Fi</h3>
+
+            <p>
+                Desplaza el router dentro del salón
+                de 10 metros de largo y 8 metros de ancho.
+                La función matemática se actualizará
+                automáticamente.
+            </p>
+
+            <!-- POSICIÓN X -->
+            <div class="campo">
+
+                <label for="router-x">
+                    Posición horizontal (X):
+                    <strong id="valor-router-x">
+                        5 m
+                    </strong>
+                </label>
+
+                <input
+                    type="range"
+                    id="router-x"
+                    min="0"
+                    max="10"
+                    step="0.5"
+                    value="5"
+                >
+
+            </div>
+
+            <!-- POSICIÓN Y -->
+            <div class="campo">
+
+                <label for="router-y">
+                    Posición vertical (Y):
+                    <strong id="valor-router-y">
+                        4 m
+                    </strong>
+                </label>
+
+                <input
+                    type="range"
+                    id="router-y"
+                    min="0"
+                    max="8"
+                    step="0.5"
+                    value="4"
+                >
+
+            </div>
+
+            <!-- COORDENADAS ACTUALES -->
+            <p class="posicion-router">
+                Posición actual del router:
+                <strong id="coordenadas-router">
+                    (5, 4)
+                </strong>
+            </p>
+
+        </div>
+
+        <!-- ORDEN DE INTEGRACIÓN -->
         <div class="campo">
-            <label for="orden">Orden de integración</label>
+
+            <label for="orden">
+                Orden de integración
+            </label>
 
             <select id="orden" name="orden">
-                <option value="dy_dx">dy dx</option>
-                <option value="dx_dy">dx dy</option>
+
+                <option value="dy_dx">
+                    dy dx
+                </option>
+
+                <option value="dx_dy">
+                    dx dy
+                </option>
+
             </select>
+
+            <small>
+                Cambia el orden de integración para
+                comprobar el teorema de Fubini.
+            </small>
+
         </div>
 
+        <!-- LÍMITES DE INTEGRACIÓN -->
         <fieldset>
-            <legend>Límites de integración</legend>
+
+            <legend>
+                Límites de integración
+            </legend>
 
             <div class="limites-grid">
+
                 <div class="campo">
-                    <label for="x-min">X inferior</label>
-                    <input type="number" step="any"
-                           id="x-min" name="x_min"
-                           value="0" required>
+                    <label for="x-min">
+                        X inferior
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        id="x-min"
+                        name="x_min"
+                        value="0"
+                        required
+                    >
                 </div>
 
                 <div class="campo">
-                    <label for="x-max">X superior</label>
-                    <input type="number" step="any"
-                           id="x-max" name="x_max"
-                           value="2" required>
+                    <label for="x-max">
+                        X superior
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        id="x-max"
+                        name="x_max"
+                        value="10"
+                        required
+                    >
                 </div>
 
                 <div class="campo">
-                    <label for="y-min">Y inferior</label>
-                    <input type="number" step="any"
-                           id="y-min" name="y_min"
-                           value="0" required>
+                    <label for="y-min">
+                        Y inferior
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        id="y-min"
+                        name="y_min"
+                        value="0"
+                        required
+                    >
                 </div>
 
                 <div class="campo">
-                    <label for="y-max">Y superior</label>
-                    <input type="number" step="any"
-                           id="y-max" name="y_max"
-                           value="2" required>
+                    <label for="y-max">
+                        Y superior
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        id="y-max"
+                        name="y_max"
+                        value="8"
+                        required
+                    >
                 </div>
+
             </div>
+
+            <small>
+                Los límites predeterminados representan
+                el área del salón: 10 × 8 = 80 m².
+            </small>
+
         </fieldset>
 
+        <!-- BOTONES -->
         <div class="acciones">
-            <button type="submit" class="boton-ova">
+
+            <button
+                type="submit"
+                class="boton-ova"
+            >
                 Calcular integral
             </button>
 
-            <button type="reset" class="boton-secundario">
+            <button
+                type="reset"
+                class="boton-secundario"
+            >
                 Limpiar
             </button>
+
         </div>
 
     </form>
 
-    <div id="resultado-integral"
-         role="status"
-         aria-live="polite">
+    <!-- RESULTADO DE LA INTEGRAL -->
+    <div
+        id="resultado-integral"
+        role="status"
+        aria-live="polite"
+    >
+
         <h3>Resultado</h3>
+
         <p>
-            Introduce los datos y presiona
-            "Calcular integral".
+            Modifica la posición del router y
+            presiona "Calcular integral" para
+            analizar la distribución de señal.
         </p>
+
     </div>
 
 </div>

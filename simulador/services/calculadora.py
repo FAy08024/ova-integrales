@@ -8,12 +8,25 @@ x, y = sp.symbols("x y")
 VARIABLES = {"x": x, "y": y}
 
 
+
 def interpretar_funcion(texto):
-    """
-    Convierte una expresión polinómica sencilla
-    en una expresión de SymPy sin ejecutar
-    código Python escrito por el usuario.
-    """
+
+    import ast
+    import sympy as sp
+
+    x, y = sp.symbols("x y")
+
+    variables = {
+        "x": x,
+        "y": y,
+        "pi": sp.pi
+    }
+
+    funciones = {
+        "sqrt": sp.sqrt,
+        "sin": sp.sin,
+        "cos": sp.cos
+    }
 
     if not isinstance(texto, str) or len(texto) > 100:
         raise ValueError("La función es demasiado larga.")
@@ -21,9 +34,9 @@ def interpretar_funcion(texto):
     try:
         arbol = ast.parse(texto, mode="eval")
     except SyntaxError:
-        raise ValueError("La función tiene una sintaxis incorrecta.")
+        raise ValueError("Sintaxis matemática incorrecta.")
 
-    if sum(1 for _ in ast.walk(arbol)) > 60:
+    if sum(1 for _ in ast.walk(arbol)) > 50:
         raise ValueError("La expresión es demasiado compleja.")
 
     def convertir(nodo):
@@ -32,9 +45,9 @@ def interpretar_funcion(texto):
             return convertir(nodo.body)
 
         if isinstance(nodo, ast.Name):
-            if nodo.id in VARIABLES:
-                return VARIABLES[nodo.id]
-            raise ValueError("Solo se permiten x e y.")
+            if nodo.id in variables:
+                return variables[nodo.id]
+            raise ValueError("Variable desconocida.")
 
         if isinstance(nodo, ast.Constant):
             valor = nodo.value
@@ -42,12 +55,14 @@ def interpretar_funcion(texto):
             if isinstance(valor, bool) or not isinstance(
                 valor, (int, float)
             ):
-                raise ValueError("Número no válido.")
+                raise ValueError("Número no permitido.")
 
-            if not math.isfinite(valor) or abs(valor) > 1000:
-                raise ValueError("Número fuera del rango permitido.")
+            numero = sp.Rational(str(valor))
 
-            return sp.Rational(str(valor))
+            if abs(numero) > 1000:
+                raise ValueError("Número demasiado grande.")
+
+            return numero
 
         if isinstance(nodo, ast.UnaryOp):
             valor = convertir(nodo.operand)
@@ -59,55 +74,57 @@ def interpretar_funcion(texto):
                 return valor
 
         if isinstance(nodo, ast.BinOp):
-            izquierdo = convertir(nodo.left)
-            derecho = convertir(nodo.right)
+
+            a = convertir(nodo.left)
+            b = convertir(nodo.right)
 
             if isinstance(nodo.op, ast.Add):
-                return izquierdo + derecho
+                return a + b
 
             if isinstance(nodo.op, ast.Sub):
-                return izquierdo - derecho
+                return a - b
 
             if isinstance(nodo.op, ast.Mult):
-                return izquierdo * derecho
+                return a * b
 
             if isinstance(nodo.op, ast.Div):
-                if not derecho.is_number or derecho == 0:
+                if not b.is_number or b == 0:
                     raise ValueError(
-                        "Solo se permite dividir por constantes no nulas."
+                        "Por ahora solo se permite dividir "
+                        "entre constantes distintas de cero."
                     )
-                return izquierdo / derecho
+                return a / b
 
             if isinstance(nodo.op, ast.Pow):
-                if not derecho.is_Integer:
+                if not b.is_Rational:
                     raise ValueError(
-                        "Usa exponentes enteros de 0 a 6."
+                        "El exponente debe ser un número racional."
                     )
 
-                exponente = int(derecho)
-
-                if not 0 <= exponente <= 6:
+                if abs(b) > 6 or b.q > 4:
                     raise ValueError(
-                        "Usa exponentes enteros de 0 a 6."
+                        "El exponente excede los límites permitidos."
                     )
 
-                return izquierdo ** exponente
+                return a ** b
 
-        raise ValueError(
-            "Expresión no permitida. Usa x, y, +, -, *, / y **."
-        )
+        if isinstance(nodo, ast.Call):
 
-    expresion = convertir(arbol)
+            if (
+                not isinstance(nodo.func, ast.Name)
+                or nodo.func.id not in funciones
+                or len(nodo.args) != 1
+                or nodo.keywords
+            ):
+                raise ValueError("Función matemática no permitida.")
 
-    try:
-        polinomio = sp.Poly(expresion, x, y)
-    except sp.PolynomialError:
-        raise ValueError("Solo se admiten polinomios.")
+            argumento = convertir(nodo.args[0])
 
-    if polinomio.total_degree() > 8:
-        raise ValueError("El grado máximo permitido es 8.")
+            return funciones[nodo.func.id](argumento)
 
-    return expresion
+        raise ValueError("Expresión matemática no permitida.")
+
+    return convertir(arbol)
 
 
 def calcular_integral_doble(datos):

@@ -4,25 +4,71 @@
 <link rel="stylesheet"
       href="{% static 'simulador/css/simulador.css' %}">
 
-<div class="panel-visualizador">
-    <h2>Visualización matemática</h2>
+<section id="situacion-problema">
+    {% include 'lecciones/secciones/situacion-problema.html' %}
+</section>
 
-    <p>Gráfica 2D de la función introducida.</p>
+<div class="panel-simulador">
 
-    <div id="grafica-2d"></div>
-
-    <h3>Visualizador 3D</h3>
-    <div id="escena3d">
-        Próximamente
+    <!-- CALCULADORA -->
+    <div class="panel-calculadora">
+        {% include 'simulador/calculadora.html' %}
     </div>
+
+    <!-- VISUALIZADOR -->
+    <div class="panel-visualizador">
+
+        <h2>Visualizador de funciones</h2>
+
+        <p>
+            Explora la función y la región
+            de integración en 2D y 3D.
+        </p>
+
+        <div class="controles-grafica">
+
+            <button type="button"
+                    id="boton-2d"
+                    class="boton-vista activo">
+                Gráfica 2D
+            </button>
+
+            <button type="button"
+                    id="boton-3d"
+                    class="boton-vista">
+                Gráfica 3D
+            </button>
+
+        </div>
+
+        <!-- GRÁFICA 2D -->
+        <div id="grafica-2d"></div>
+
+        <!-- GRÁFICA 3D -->
+        <div id="grafica-3d"
+             hidden>
+        </div>
+
+        <p id="mensaje-grafica">
+            Calcula una integral para generar
+            su representación gráfica.
+        </p>
+
+    </div>
+
 </div>
 
-{% load static %}
-
+<!-- LIBRERÍA DE GRÁFICAS -->
 <script defer
     src="https://cdn.plot.ly/plotly-4.1.1.min.js">
 </script>
 
+<!-- VISUALIZADOR 3D -->
+<script defer
+    src="{% static 'simulador/js/visualizador3d.js' %}">
+</script>
+
+<!-- CALCULADORA -->
 <script defer
     src="{% static 'simulador/js/calculadora.js' %}">
 </script>

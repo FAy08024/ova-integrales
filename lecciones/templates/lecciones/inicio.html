@@ -2,7 +2,7 @@
 {% extends 'lecciones/base.html' %}
 
 {% block title %}
-OVA - Integrales Dobles y Triples
+OVA - Integrales multivariables
 {% endblock %}
 
 {% block content %}
@@ -12,39 +12,10 @@ OVA - Integrales Dobles y Triples
     {% include 'lecciones/secciones/introduccion.html' %}
 </section>
 
-<!-- 2. INTEGRALES ITERADAS Y FUBINI -->
-<section id="teoria">
-    {% include 'lecciones/secciones/fubini.html' %}
-</section>
-
-<!-- 3. REGIONES TIPO I Y II -->
-<section id="regiones">
-    {% include 'lecciones/secciones/regiones.html' %}
-</section>
-
-<!-- 4. COORDENADAS POLARES -->
-<section id="polares">
-    {% include 'lecciones/secciones/polares.html' %}
-</section>
-
-<!-- 5. MASA Y CENTRO DE MASA -->
-<section id="masa">
-    {% include 'lecciones/secciones/masa_centro.html' %}
-</section>
-
-<!-- 6. INTEGRALES TRIPLES -->
-<section id="triples">
-    {% include 'lecciones/secciones/integrales_triples.html' %}
-</section>
-
 <!-- 7. SIMULADOR INTERACTIVO -->
 <section id="simulador">
     {% include 'simulador/PANEL.html' %}
 </section>
 
-<!-- 8. EVALUACIÓN -->
-<section id="evaluacion">
-    {% include 'evaluacion/formulario.html' %}
-</section>
 
 {% endblock %}
