@@ -1,117 +1,288 @@
 
+
 <section class="comparacion-wifi">
 
     <h2>Comparación de ubicaciones del router</h2>
 
     <p>
-        Se presentan tres escenarios hipotéticos de ubicación
-        del router dentro de un salón de 10 × 8 metros.
-        Los resultados corresponden al modelo matemático propuesto.
+        Se comparan tres ubicaciones hipotéticas del router
+        dentro de un salón de 10 × 8 metros, aplicando
+        integrales dobles y el teorema de Fubini.
     </p>
 
     <div class="tabla-comparacion-contenedor">
+
         <table class="tabla-comparacion">
 
             <thead>
                 <tr>
                     <th>Ubicación</th>
                     <th>Función S(x,y)</th>
+                    <th>Rangos de integración</th>
+                    <th>Integral exacta</th>
                     <th>Promedio espacial</th>
+                    <th>Tiempo dy dx</th>
+                    <th>Tiempo dx dy</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
 
             <tbody>
-                <tr>
-                    <td>Centro (5,4)</td>
+
+                <!-- ESCENARIO 1: CENTRO -->
+                <tr data-x="5" data-y="4">
+
+                    <td>
+                        <strong>Centro</strong>
+                        <br>
+                        (5, 4)
+                    </td>
+
                     <td>
                         <code>-40-(x-5)**2-(y-4)**2</code>
                     </td>
-                    <td>-53,67 dBm</td>
+
                     <td>
-                        <button type="button"
-                                class="copiar-funcion"
-                                data-texto="-40-(x-5)**2-(y-4)**2">
+                        X: [0, 10] m
+                        <br>
+                        Y: [0, 8] m
+                    </td>
+
+                    <td>-12880/3</td>
+
+                    <td>-53,67 dBm</td>
+
+                    <td class="tiempo-dy-dx">
+                        61.7417 ms
+                    </td>
+
+                    <td class="tiempo-dx-dy">
+                        49.0407 ms
+                    </td>
+
+                    <td>
+                        <button
+                            type="button"
+                            class="copiar-funcion"
+                            data-texto="-40-(x-5)**2-(y-4)**2">
                             Copiar función
                         </button>
 
-                        <button type="button"
-                                class="copiar-funcion"
-                                data-texto="∫_0^10 ∫_0^8 [-40-(x-5)^2-(y-4)^2] dy dx">
+                        <button
+                            type="button"
+                            class="copiar-funcion"
+                            data-texto="∫_0^10 ∫_0^8 [-40-(x-5)^2-(y-4)^2] dy dx">
                             Copiar integral
                         </button>
 
-                        <button type="button"
-                                class="cargar-ejemplo"
-                                data-x="5" data-y="4">
+                        <button
+                            type="button"
+                            class="cargar-ejemplo"
+                            data-x="5"
+                            data-y="4">
                             Cargar ejemplo
                         </button>
                     </td>
+
                 </tr>
 
-                <tr>
-                    <td>Esquina (0,0)</td>
+                <!-- ESCENARIO 2: ESQUINA -->
+                <tr data-x="0" data-y="0">
+
+                    <td>
+                        <strong>Esquina</strong>
+                        <br>
+                        (0, 0)
+                    </td>
+
                     <td>
                         <code>-40-x**2-y**2</code>
                     </td>
-                    <td>-94,67 dBm</td>
+
                     <td>
-                        <button type="button"
-                                class="copiar-funcion"
-                                data-texto="-40-x**2-y**2">
+                        X: [0, 10] m
+                        <br>
+                        Y: [0, 8] m
+                    </td>
+
+                    <td>-22720/3</td>
+
+                    <td>-94,67 dBm</td>
+
+                    <td class="tiempo-dy-dx">
+                        42.5043 ms
+                    </td>
+
+                    <td class="tiempo-dx-dy">
+                        36.0990 ms
+                    </td>
+
+                    <td>
+                        <button
+                            type="button"
+                            class="copiar-funcion"
+                            data-texto="-40-x**2-y**2">
                             Copiar función
                         </button>
 
-                        <button type="button"
-                                class="copiar-funcion"
-                                data-texto="∫_0^10 ∫_0^8 (-40-x^2-y^2) dy dx">
+                        <button
+                            type="button"
+                            class="copiar-funcion"
+                            data-texto="∫_0^10 ∫_0^8 (-40-x^2-y^2) dy dx">
                             Copiar integral
                         </button>
 
-                        <button type="button"
-                                class="cargar-ejemplo"
-                                data-x="0" data-y="0">
+                        <button
+                            type="button"
+                            class="cargar-ejemplo"
+                            data-x="0"
+                            data-y="0">
                             Cargar ejemplo
                         </button>
                     </td>
+
                 </tr>
 
-                <tr>
-                    <td>Lateral (2,4)</td>
+                <!-- ESCENARIO 3: LATERAL -->
+                <tr data-x="2" data-y="4">
+
+                    <td>
+                        <strong>Lateral</strong>
+                        <br>
+                        (2, 4)
+                    </td>
+
                     <td>
                         <code>-40-(x-2)**2-(y-4)**2</code>
                     </td>
-                    <td>-62,67 dBm</td>
+
                     <td>
-                        <button type="button"
-                                class="copiar-funcion"
-                                data-texto="-40-(x-2)**2-(y-4)**2">
+                        X: [0, 10] m
+                        <br>
+                        Y: [0, 8] m
+                    </td>
+
+                    <td>-15040/3</td>
+
+                    <td>-62,67 dBm</td>
+
+                    <td class="tiempo-dy-dx">
+                        71.3876 ms
+                    </td>
+
+                    <td class="tiempo-dx-dy">
+                        61.7607 ms
+                    </td>
+
+                    <td>
+                        <button
+                            type="button"
+                            class="copiar-funcion"
+                            data-texto="-40-(x-2)**2-(y-4)**2">
                             Copiar función
                         </button>
 
-                        <button type="button"
-                                class="copiar-funcion"
-                                data-texto="∫_0^10 ∫_0^8 [-40-(x-2)^2-(y-4)^2] dy dx">
+                        <button
+                            type="button"
+                            class="copiar-funcion"
+                            data-texto="∫_0^10 ∫_0^8 [-40-(x-2)^2-(y-4)^2] dy dx">
                             Copiar integral
                         </button>
 
-                        <button type="button"
-                                class="cargar-ejemplo"
-                                data-x="2" data-y="4">
+                        <button
+                            type="button"
+                            class="cargar-ejemplo"
+                            data-x="2"
+                            data-y="4">
                             Cargar ejemplo
                         </button>
                     </td>
+
                 </tr>
+
             </tbody>
+
         </table>
+
     </div>
 
+    <!-- MENSAJE AL COPIAR -->
     <p id="mensaje-comparacion" aria-live="polite"></p>
 
+    <!-- ANÁLISIS COMPARATIVO -->
+    <div class="analisis-comparacion">
+
+        <h3>Análisis de resultados</h3>
+
+        <p>
+            Según el modelo matemático propuesto,
+            la ubicación central del router (5,4)
+            presenta el mayor promedio espacial
+            de señal, con -53,67 dBm.
+        </p>
+
+        <p>
+            La ubicación lateral (2,4) presenta
+            un promedio de -62,67 dBm,
+            mientras que la esquina (0,0)
+            presenta -94,67 dBm.
+        </p>
+
+        <p>
+            En los tres escenarios, ambos órdenes
+            de integración producen el mismo
+            resultado exacto, verificando el
+            teorema de Fubini.
+        </p>
+
+        <h3>Comparación de tiempos de ejecución</h3>
+
+        <p>
+            Para el escenario central, las medianas
+            registradas fueron 61,7417 ms para
+            el orden dy dx y 49,0407 ms para dx dy.
+        </p>
+
+        <p>
+            En la esquina, los tiempos fueron
+            42,5043 ms y 36,0990 ms,
+            respectivamente.
+        </p>
+
+        <p>
+            En la ubicación lateral, se registraron
+            71,3876 ms y 61,7607 ms.
+        </p>
+
+        <p>
+            En estas mediciones, el orden dx dy
+            presentó menores tiempos que dy dx
+            en los tres escenarios. Sin embargo,
+            estas diferencias pueden estar influidas
+            por la caché de SymPy y las condiciones
+            de ejecución, por lo que no demuestran
+            una superioridad general de ese orden.
+        </p>
+
+    </div>
+
+    <!-- OBSERVACIONES -->
     <p class="nota-comparacion">
-        Los resultados son estáticos y corresponden al modelo
-        hipotético sobre una superficie de 80 m².
-        No representan mediciones reales de cobertura Wi-Fi.
+
+        <strong>Nota:</strong>
+
+        Los tiempos corresponden a las medianas
+        de cinco mediciones por escenario.
+
+        Los resultados matemáticos corresponden
+        a una superficie rectangular de 80 m².
+
+        El promedio espacial representa la media
+        aritmética de los valores expresados en dBm.
+
+        Este modelo es hipotético y no representa
+        mediciones reales de cobertura Wi-Fi.
+
     </p>
 
 </section>

@@ -263,6 +263,142 @@ if (resultado.fubini) {
     contenedorResultado.appendChild(seccion);
 }
 
+// ========================================
+// TIEMPOS DE EJECUCIÓN DE FUBINI
+// ========================================
+
+if (resultado.tiempos) {
+
+    const tiempos = resultado.tiempos;
+
+    const seccionTiempos = document.createElement("div");
+    seccionTiempos.className = "resultado-tiempos";
+
+    const tituloTiempos = document.createElement("h3");
+    tituloTiempos.textContent = "Tiempos de ejecución";
+
+    const tiempo1 = document.createElement("p");
+    tiempo1.textContent =
+        `Primero y (dy dx): ${tiempos.dy_dx.toFixed(4)} ms`;
+
+    const tiempo2 = document.createElement("p");
+    tiempo2.textContent =
+        `Primero x (dx dy): ${tiempos.dx_dy.toFixed(4)} ms`;
+
+    seccionTiempos.append(
+        tituloTiempos,
+        tiempo1,
+        tiempo2
+    );
+
+    contenedorResultado.appendChild(seccionTiempos);
+}
+
+// ========================================
+// ACTUALIZAR TABLA COMPARATIVA
+// ========================================
+
+if (resultado.tiempos && routerX && routerY) {
+
+    const x = Number(routerX.value);
+    const y = Number(routerY.value);
+
+    const xMin = Number(datos.get("x_min"));
+    const xMax = Number(datos.get("x_max"));
+    const yMin = Number(datos.get("y_min"));
+    const yMax = Number(datos.get("y_max"));
+
+    // Solo registrar el modelo de referencia
+    // en el salón completo de 10 × 8 metros.
+    const funcionEsperada =
+        `-40-(x-${x})**2-(y-${y})**2`;
+
+    const funcionActual = String(
+        datos.get("funcion") || ""
+    ).replace(/\s+/g, "");
+
+    const esEscenarioReferencia =
+        xMin === 0 &&
+        xMax === 10 &&
+        yMin === 0 &&
+        yMax === 8 &&
+        funcionActual === funcionEsperada;
+
+    if (esEscenarioReferencia) {
+
+        const filas = document.querySelectorAll(
+            ".tabla-comparacion tbody tr"
+        );
+
+        filas.forEach(fila => {
+
+            if (
+                Number(fila.dataset.x) === x &&
+                Number(fila.dataset.y) === y
+            ) {
+
+                const celdaDyDx = fila.querySelector(
+                    ".tiempo-dy-dx"
+                );
+
+                const celdaDxDy = fila.querySelector(
+                    ".tiempo-dx-dy"
+                );
+
+                if (celdaDyDx && celdaDxDy) {
+                    celdaDyDx.textContent =
+                        `${resultado.tiempos.dy_dx.toFixed(4)} ms`;
+
+                    celdaDxDy.textContent =
+                        `${resultado.tiempos.dx_dy.toFixed(4)} ms`;
+                }
+            }
+        });
+    }
+}
+
+
+// ========================================
+// VALIDACIÓN NUMÉRICA CON SCIPY
+// ========================================
+
+
+// ========================================
+// RESULTADOS DE SCIPY
+// ========================================
+
+if (resultado.validacion) {
+
+    const validacion = resultado.validacion;
+
+    const seccionValidacion = document.createElement("div");
+    seccionValidacion.className = "resultado-validacion";
+
+    const tituloValidacion = document.createElement("h3");
+    tituloValidacion.textContent = "Validación numérica con SciPy";
+
+    const resultadoSympy = document.createElement("p");
+    resultadoSympy.textContent =
+        `Resultado SymPy: ${Number(validacion.sympy).toFixed(6)}`;
+
+    const resultadoScipy = document.createElement("p");
+    resultadoScipy.textContent =
+        `Resultado SciPy: ${Number(validacion.scipy).toFixed(6)}`;
+
+    const errorAbsoluto = document.createElement("p");
+    errorAbsoluto.textContent =
+        `Error absoluto: ${Number(validacion.error_absoluto).toExponential(4)}`;
+
+    seccionValidacion.append(
+        tituloValidacion,
+        resultadoSympy,
+        resultadoScipy,
+        errorAbsoluto
+    );
+
+    contenedorResultado.appendChild(seccionValidacion);
+}
+
 
             if (resultado.grafica) {
 

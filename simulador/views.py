@@ -1,5 +1,6 @@
 
 import json
+from time import perf_counter
 
 from django.shortcuts import render
 from django.http import JsonResponse
@@ -7,50 +8,26 @@ from django.views.decorators.http import require_POST
 
 from .services.calculadora import (
     calcular_integral_doble,
-    generar_grafica_2d
+    generar_grafica_2d,
+    validar_integral_scipy
 )
 
 
-# ==========================================
-# VISTA DEL SIMULADOR
-# ==========================================
-
 def inicio(request):
-    return render(request, 'simulador/PANEL.html')
+    return render(request, "simulador/PANEL.html")
 
-
-# ==========================================
-# CALCULADORA DE INTEGRALES
-# ==========================================
 
 @require_POST
 def calcular_integral(request):
-
     try:
-        # Recibir los datos enviados por JavaScript
         datos = json.loads(request.body)
-
-        # DEPURACIÓN: comprobar qué recibe Django
-        print("\n========== DATOS RECIBIDOS ==========", flush=True)
-        print("Datos:", datos, flush=True)
 
         if not isinstance(datos, dict):
             raise ValueError("Los datos no son válidos.")
 
-        print("Tipo de integral:", datos.get("tipo"), flush=True)
-        print("Coordenadas:", datos.get("coordenadas"), flush=True)
-        print("Función:", datos.get("funcion"), flush=True)
-        print("Orden:", datos.get("orden"), flush=True)
-
-        # ==================================
-        # INTEGRAL CON EL ORDEN SELECCIONADO
-        # ==================================
-
-        resultado = calcular_integral_doble(datos)
-
-        # ==================================
-        # VERIFICACIÓN DEL TEOREMA DE FUBINI
-        # ==================================
+        # ======================================
+        # COMPARACIÓN DE AMBOS ÓRDENES DE FUBINI
+        # ======================================
 
         datos_dy_dx = datos.copy()
         datos_dy_dx["orden"] = "dy_dx"
@@ -58,54 +35,98 @@ def calcular_integral(request):
         datos_dx_dy = datos.copy()
         datos_dx_dy["orden"] = "dx_dy"
 
+        # Medir el orden dy dx
+        inicio_dy_dx = perf_counter()
+
         resultado_dy_dx = calcular_integral_doble(
             datos_dy_dx
         )
+
+        tiempo_dy_dx = (
+            perf_counter() - inicio_dy_dx
+        ) * 1000
+
+        # Medir el orden dx dy
+        inicio_dx_dy = perf_counter()
 
         resultado_dx_dy = calcular_integral_doble(
             datos_dx_dy
         )
 
-        # Comparar los resultados exactos
+        tiempo_dx_dy = (
+            perf_counter() - inicio_dx_dy
+        ) * 1000
+
+        # ======================================
+        # RESULTADO DEL ORDEN SELECCIONADO
+        # ======================================
+
+        orden = datos.get("orden")
+
+        if orden == "dy_dx":
+            resultado = resultado_dy_dx
+
+        elif orden == "dx_dy":
+            resultado = resultado_dx_dy
+
+        else:
+            raise ValueError(
+                "El orden de integración no es válido."
+            )
+
+        # ======================================
+        # VERIFICACIÓN DE FUBINI
+        # ======================================
+
         coinciden = (
             resultado_dy_dx["exacto"]
             == resultado_dx_dy["exacto"]
         )
 
-        # ==================================
-        # GENERAR DATOS PARA GRÁFICAS 2D/3D
-        # ==================================
+       
+        # ======================================
+        # GENERAR GRÁFICAS
+        # ======================================
 
         grafica = generar_grafica_2d(datos)
 
-        # ==================================
-        # DEVOLVER RESULTADOS A JAVASCRIPT
-        # ==================================
+        # ======================================
+        # VALIDACIÓN NUMÉRICA CON SCIPY
+        # ======================================
 
-        print("Resultado:", resultado, flush=True)
-        print("Fubini coincide:", coinciden, flush=True)
-        print("=====================================\n", flush=True)
+        validacion = validar_integral_scipy(
+            datos,
+            resultado["decimal"]
+        )
+
+        # ======================================
+        # RESPUESTA A JAVASCRIPT
+        # ======================================
 
         return JsonResponse({
             "ok": True,
-
             "exacto": resultado["exacto"],
             "decimal": resultado["decimal"],
-
             "grafica": grafica,
-
+            "validacion": validacion,
             "fubini": {
                 "dy_dx": resultado_dy_dx,
                 "dx_dy": resultado_dx_dy,
                 "coinciden": coinciden
+            },
+            "tiempos": {
+                "dy_dx": round(tiempo_dy_dx, 4),
+                "dx_dy": round(tiempo_dx_dy, 4),
+                "unidad": "ms"
             }
         })
 
-    except (ValueError, TypeError, UnicodeDecodeError) as error:
 
-        print("\n========== ERROR ==========", flush=True)
-        print("Error:", str(error), flush=True)
-        print("===========================\n", flush=True)
+    except (
+        ValueError,
+        TypeError,
+        UnicodeDecodeError
+    ) as error:
 
         return JsonResponse({
             "ok": False,

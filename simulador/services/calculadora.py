@@ -228,3 +228,91 @@ def generar_grafica_2d(datos):
         "y": valores_y.tolist(),
         "z": Z.tolist()
     }
+
+# ==========================================
+# VALIDACIÓN NUMÉRICA CON SCIPY
+# ==========================================
+
+from scipy.integrate import dblquad
+
+
+def validar_integral_scipy(datos, resultado_analitico):
+
+    # Reutilizar el intérprete seguro de SymPy
+    funcion = interpretar_funcion(datos["funcion"])
+
+    # Obtener los límites del formulario
+    try:
+        x_min = float(datos["x_min"])
+        x_max = float(datos["x_max"])
+        y_min = float(datos["y_min"])
+        y_max = float(datos["y_max"])
+
+    except (KeyError, ValueError, TypeError):
+        raise ValueError("Límites numéricos no válidos.")
+
+    limites = (x_min, x_max, y_min, y_max)
+
+    if not all(math.isfinite(valor) for valor in limites):
+        raise ValueError("Los límites deben ser finitos.")
+
+    if any(abs(valor) > 100 for valor in limites):
+        raise ValueError("Los límites exceden el rango permitido.")
+
+    if x_min >= x_max or y_min >= y_max:
+        raise ValueError("Los límites están invertidos.")
+
+    # Convertir la expresión SymPy en función numérica
+    funcion_numerica = sp.lambdify(
+        (x, y),
+        funcion,
+        modules="numpy"
+    )
+
+    # SciPy dblquad recibe primero y, después x
+    def integrando(y_valor, x_valor):
+        valor = funcion_numerica(x_valor, y_valor)
+
+        try:
+            valor = float(valor)
+        except (ValueError, TypeError, OverflowError):
+            raise ValueError(
+                "La función no puede evaluarse numéricamente."
+            )
+
+        if not math.isfinite(valor):
+            raise ValueError(
+                "La función produce valores no finitos."
+            )
+
+        return valor
+
+    # Integración numérica independiente
+    resultado_numerico, error_estimado = dblquad(
+        integrando,
+        x_min,
+        x_max,
+        y_min,
+        y_max
+    )
+
+    # Comparación con el resultado simbólico
+    valor_analitico = float(resultado_analitico)
+
+    error_absoluto = abs(
+        valor_analitico - resultado_numerico
+    )
+
+    error_relativo = (
+        error_absoluto / abs(valor_analitico) * 100
+        if valor_analitico != 0
+        else None
+    )
+
+    return {
+        "sympy": valor_analitico,
+        "scipy": resultado_numerico,
+        "error_absoluto": error_absoluto,
+        "error_relativo_porcentaje": error_relativo,
+        "error_estimado_scipy": error_estimado
+    }

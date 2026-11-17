@@ -1,0 +1,213 @@
+
+<section class="desarrollo-matematico">
+
+    <div class="desarrollo-encabezado">
+        <h2>Desarrollo matemático paso a paso</h2>
+        <p>
+            Resolución analítica de la integral doble
+            para un router ubicado en el centro del salón.
+        </p>
+    </div>
+
+    <article class="paso-matematico">
+        <h3>Paso 1. Definir el modelo Wi-Fi</h3>
+
+        <p>
+            Se utiliza la función hipotética de intensidad
+            de señal:
+        </p>
+
+        \[
+        S(x,y)=-40-(x-a)^2-(y-b)^2
+        \]
+
+        <p>
+            Para el router ubicado en (5,4):
+        </p>
+
+        \[
+        \boxed{S(x,y)=-40-(x-5)^2-(y-4)^2}
+        \]
+    </article>
+
+    <article class="paso-matematico">
+        <h3>Paso 2. Definir la región de integración</h3>
+
+        <p>
+            El salón mide 10 metros de largo y
+            8 metros de ancho.
+        </p>
+
+        \[
+        R=\{(x,y):0\le x\le10,\ 0\le y\le8\}
+        \]
+
+        \[
+        A=10(8)=80\ \mathrm{m}^2
+        \]
+    </article>
+
+    <article class="paso-matematico">
+        <h3>Paso 3. Plantear la integral doble</h3>
+
+        \[
+        I=\iint_R S(x,y)\,dA
+        \]
+
+        <p>
+            Aplicando el teorema de Fubini:
+        </p>
+
+        \[
+        I=\int_0^{10}\int_0^8
+        [-40-(x-5)^2-(y-4)^2]\,dy\,dx
+        \]
+    </article>
+
+    <article class="paso-matematico">
+        <h3>Paso 4. Integrar primero respecto a y</h3>
+
+        <p>
+            Durante esta integración, x se considera
+            constante.
+        </p>
+
+        \[
+        \int[-40-(x-5)^2-(y-4)^2]\,dy
+        \]
+
+        <p>La primitiva es:</p>
+
+        \[
+        -40y-(x-5)^2y-\frac{(y-4)^3}{3}
+        \]
+
+        <p>Evaluamos desde y = 0 hasta y = 8:</p>
+
+        \[
+        \left[
+        -40y-(x-5)^2y-\frac{(y-4)^3}{3}
+        \right]_0^8
+        \]
+
+        <p>El resultado de la integral interna es:</p>
+
+        \[
+        \boxed{-\frac{1088}{3}-8(x-5)^2}
+        \]
+    </article>
+
+    <article class="paso-matematico">
+        <h3>Paso 5. Integrar respecto a x</h3>
+
+        <p>
+            Sustituimos el resultado anterior:
+        </p>
+
+        \[
+        I=\int_0^{10}
+        \left[-\frac{1088}{3}-8(x-5)^2\right]dx
+        \]
+
+        <p>Calculamos la primitiva:</p>
+
+        \[
+        -\frac{1088x}{3}
+        -\frac{8(x-5)^3}{3}
+        \]
+
+        <p>Evaluamos entre 0 y 10:</p>
+
+        \[
+        I=\left[
+        -\frac{1088x}{3}
+        -\frac{8(x-5)^3}{3}
+        \right]_0^{10}
+        \]
+
+        \[
+        \boxed{I=-\frac{12880}{3}}
+        \]
+    </article>
+
+    <article class="paso-matematico">
+        <h3>Paso 6. Comprobar el otro orden de Fubini</h3>
+
+        <p>
+            Ahora integramos primero respecto a x
+            y después respecto a y.
+        </p>
+
+        \[
+        I=\int_0^8\int_0^{10}
+        [-40-(x-5)^2-(y-4)^2]\,dx\,dy
+        \]
+
+        <p>La primitiva respecto a x es:</p>
+
+        \[
+        -40x-\frac{(x-5)^3}{3}
+        -x(y-4)^2
+        \]
+
+        <p>Evaluando entre x = 0 y x = 10:</p>
+
+        \[
+        \boxed{-\frac{1450}{3}-10(y-4)^2}
+        \]
+
+        <p>Integramos respecto a y:</p>
+
+        \[
+        I=\int_0^8
+        \left[-\frac{1450}{3}-10(y-4)^2\right]dy
+        \]
+
+        \[
+        I=\left[
+        -\frac{1450y}{3}
+        -\frac{10(y-4)^3}{3}
+        \right]_0^8
+        \]
+
+        \[
+        \boxed{I=-\frac{12880}{3}}
+        \]
+
+        <p class="conclusion-matematica">
+            Ambos órdenes de integración producen
+            el mismo resultado, verificando el
+            teorema de Fubini para este modelo.
+        </p>
+    </article>
+
+    <article class="paso-matematico resultado-final">
+        <h3>Paso 7. Calcular el promedio espacial</h3>
+
+        <p>
+            Dividimos la integral doble entre el área
+            total del salón:
+        </p>
+
+        \[
+        \overline{S}=\frac{1}{A}\iint_R S(x,y)\,dA
+        \]
+
+        \[
+        \overline{S}
+        =\frac{-12880/3}{80}
+        =-\frac{161}{3}
+        \]
+
+        \[
+        \boxed{\overline{S}\approx-53.67\ \mathrm{dBm}}
+        \]
+
+        <p>
+            Este valor representa el promedio espacial
+            aritmético de la señal expresada en dBm
+            bajo el modelo hipotético.
+        </p>
+    </article>
+
+</section>

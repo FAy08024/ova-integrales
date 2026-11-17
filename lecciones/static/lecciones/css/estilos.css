@@ -543,3 +543,116 @@ h3 {
     color: #64748b;
     font-size: 13px;
 }
+
+/* DESARROLLO MATEMÁTICO */
+
+#desarrollo-matematico {
+    width: 100%;
+    margin: 35px auto;
+    box-sizing: border-box;
+}
+
+.desarrollo-matematico {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.desarrollo-encabezado {
+    padding: 25px;
+    margin-bottom: 20px;
+    background: #ffffff;
+    border: 1px solid #dbe4ef;
+    border-radius: 12px;
+}
+
+.desarrollo-encabezado h2 {
+    color: #103b70;
+    margin-bottom: 12px;
+}
+
+.paso-matematico {
+    background: #ffffff;
+    border: 1px solid #dbe4ef;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 18px;
+    overflow-x: auto;
+}
+
+.paso-matematico h3 {
+    color: #1456a0;
+    margin: 0 0 15px;
+}
+
+.paso-matematico p {
+    line-height: 1.7;
+    margin: 12px 0;
+}
+
+.paso-matematico mjx-container[display="true"] {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 12px 0;
+}
+
+.conclusion-matematica {
+    font-weight: 600;
+    color: #103b70;
+}
+
+.resultado-final {
+    border-left: 4px solid #1456a0;
+}
+
+@media (max-width: 768px) {
+    .paso-matematico,
+    .desarrollo-encabezado {
+        padding: 16px;
+    }
+}
+
+/* TIEMPOS DE EJECUCIÓN */
+
+.resultado-tiempos {
+    margin-top: 18px;
+    padding: 15px;
+    border: 1px solid #dbe4ef;
+    border-radius: 8px;
+    background: #f8fafc;
+}
+
+.resultado-tiempos h3 {
+    color: #103b70;
+    margin: 0 0 12px;
+}
+
+.resultado-tiempos p {
+    margin: 8px 0;
+}
+
+.tabla-comparacion .tiempo-dy-dx,
+.tabla-comparacion .tiempo-dx-dy {
+    white-space: nowrap;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+/* VALIDACIÓN NUMÉRICA SCIPY */
+
+.resultado-validacion {
+    margin-top: 18px;
+    padding: 15px;
+    background: #f8fafc;
+    border: 1px solid #dbe4ef;
+    border-radius: 8px;
+}
+
+.resultado-validacion h3 {
+    color: #103b70;
+    margin: 0 0 12px;
+}
+
+.resultado-validacion p {
+    margin: 8px 0;
+    line-height: 1.6;
+}
