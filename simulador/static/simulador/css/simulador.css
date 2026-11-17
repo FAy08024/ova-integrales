@@ -206,3 +206,41 @@ grafica-2d {
     border-radius: 8px;
     text-align: center;
 }
+
+/* PROMEDIO ESPACIAL WI-FI */
+
+.promedio-wifi {
+    margin-top: 18px;
+    padding: 16px;
+    background-color: #dbeafe;
+    border-left: 4px solid #1456A0;
+    border-radius: 8px;
+    color: #103B70;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+/* RESULTADOS DEL TEOREMA DE FUBINI */
+
+.resultado-fubini {
+    margin-top: 24px;
+    padding: 20px;
+    border: 1px solid #d5e3f3;
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+.resultado-fubini h3 {
+    color: #103B70;
+    margin-bottom: 15px;
+}
+
+.resultado-fubini p {
+    margin-bottom: 12px;
+}
+
+.conclusion-fubini {
+    margin-top: 15px;
+    font-weight: 600;
+    color: #1456A0;
+}

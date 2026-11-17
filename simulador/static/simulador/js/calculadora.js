@@ -13,7 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("No se encontró el formulario.");
         return;
     }
-    
+
+
 /* ========================================
    MOVIMIENTO DEL ROUTER WI-FI
 ======================================== */
@@ -30,39 +31,43 @@ const coordenadasRouter = document.getElementById(
 
 const campoFuncion = document.getElementById("funcion");
 
-
 function actualizarRouter() {
 
-    if (!routerX || !routerY || !campoFuncion) {
+    if (
+        !routerX ||
+        !routerY ||
+        !valorRouterX ||
+        !valorRouterY ||
+        !coordenadasRouter ||
+        !campoFuncion
+    ) {
+        console.error("Falta un elemento del router en el HTML.");
         return;
     }
 
-    // Obtener posición actual
-    const a = Number(routerX.value);
-    const b = Number(routerY.value);
+    const x = Number(routerX.value);
+    const y = Number(routerY.value);
 
-    // Actualizar los metros mostrados
-    valorRouterX.textContent = `${a} m`;
-    valorRouterY.textContent = `${b} m`;
+    // Actualizar metros
+    valorRouterX.textContent = `${x} m`;
+    valorRouterY.textContent = `${y} m`;
 
-    // Actualizar las coordenadas
-    coordenadasRouter.textContent = `(${a}, ${b})`;
+    // Actualizar coordenadas
+    coordenadasRouter.textContent = `(${x}, ${y})`;
 
-    // Actualizar automáticamente la función
+    // Actualizar función matemática
     campoFuncion.value =
-        `-40-(x-${a})**2-(y-${b})**2`;
+        `-40-(x-${x})**2-(y-${y})**2`;
 }
 
-
-// Detectar movimiento de los controles
+// Ejecutar al mover cualquiera de los sliders
 if (routerX && routerY) {
-
     routerX.addEventListener("input", actualizarRouter);
     routerY.addEventListener("input", actualizarRouter);
 
-    // Inicializar función y coordenadas
     actualizarRouter();
 }
+
 
     function mostrarResultado(titulo, mensaje) {
         contenedorResultado.replaceChildren();
@@ -170,10 +175,92 @@ if (routerX && routerY) {
                 );
             }
 
-            mostrarResultado(
-                "Resultado de la integral",
-                `Exacto: ${resultado.exacto} | Decimal: ${resultado.decimal}`
-            );
+            
+// Obtener los límites del formulario
+const xMin = Number(datos.get("x_min"));
+const xMax = Number(datos.get("x_max"));
+const yMin = Number(datos.get("y_min"));
+const yMax = Number(datos.get("y_max"));
+
+// Calcular el área rectangular
+const area = (xMax - xMin) * (yMax - yMin);
+
+// Obtener el resultado decimal de Python
+const valorIntegral = Number(resultado.decimal);
+
+// Calcular el promedio espacial
+const promedio = valorIntegral / area;
+
+// Limpiar el resultado anterior
+contenedorResultado.replaceChildren();
+
+// Título
+const titulo = document.createElement("h3");
+titulo.textContent = "Resultados del análisis Wi-Fi";
+
+// Integral exacta
+const exacto = document.createElement("p");
+exacto.textContent =
+    `Resultado exacto de la integral: ${resultado.exacto}`;
+
+// Integral decimal
+const decimal = document.createElement("p");
+decimal.textContent =
+    `Resultado decimal: ${resultado.decimal}`;
+
+// Promedio espacial
+const promedioElemento = document.createElement("p");
+
+promedioElemento.className = "promedio-wifi";
+
+promedioElemento.textContent =
+    `Promedio espacial de señal: ${promedio.toFixed(2)} dBm`;
+
+// Mostrar los resultados
+contenedorResultado.append(
+    titulo,
+    exacto,
+    decimal,
+    promedioElemento
+);
+
+// COMPARACIÓN DEL TEOREMA DE FUBINI
+
+if (resultado.fubini) {
+
+    const fubini = resultado.fubini;
+
+    const seccion = document.createElement("div");
+    seccion.className = "resultado-fubini";
+
+    const tituloFubini = document.createElement("h3");
+    tituloFubini.textContent = "Verificación de Fubini";
+
+    const orden1 = document.createElement("p");
+    orden1.textContent =
+        `Orden dy dx: ${fubini.dy_dx.exacto}`;
+
+    const orden2 = document.createElement("p");
+    orden2.textContent =
+        `Orden dx dy: ${fubini.dx_dy.exacto}`;
+
+    const conclusion = document.createElement("p");
+    conclusion.className = "conclusion-fubini";
+
+    conclusion.textContent = fubini.coinciden
+        ? "Verificación correcta: ambos órdenes coinciden."
+        : "Los resultados requieren revisión.";
+
+    seccion.append(
+        tituloFubini,
+        orden1,
+        orden2,
+        conclusion
+    );
+
+    contenedorResultado.appendChild(seccion);
+}
+
 
             if (resultado.grafica) {
 
