@@ -244,3 +244,156 @@ grafica-2d {
     font-weight: 600;
     color: #1456A0;
 }
+
+/* ========================================
+   CALCULADORA WI-FI - DISEÑO COMPACTO
+======================================== */
+
+.calculadora-integrales {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Espaciado de los campos */
+.calculadora-integrales .campo {
+    margin-bottom: 14px;
+}
+
+/* Etiquetas */
+.calculadora-integrales .campo label {
+    font-weight: 600;
+    color: #103B70;
+    margin-bottom: 5px;
+}
+
+/* Campos de entrada */
+.calculadora-integrales input[type="text"],
+.calculadora-integrales input[type="number"],
+.calculadora-integrales select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+/* Panel de ubicación del router */
+.calculadora-integrales .controles-router {
+    margin: 18px 0;
+    padding: 18px;
+    border-radius: 10px;
+}
+
+/* Controles deslizantes */
+.calculadora-integrales input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+    accent-color: #1456A0;
+}
+
+/* Límites de integración */
+.calculadora-integrales .limites-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+/* Botones */
+.calculadora-integrales .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+/* Resultado */
+.calculadora-integrales #resultado-integral {
+    margin-top: 20px;
+}
+
+/* Pantallas pequeñas */
+@media (max-width: 480px) {
+    .calculadora-integrales .limites-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .calculadora-integrales .controles-router {
+        padding: 14px;
+    }
+}
+
+
+
+
+/* TABLA COMPARATIVA WI-FI */
+
+.comparacion-wifi {
+    width: 100%;
+    margin-top: 35px;
+    padding: 25px;
+    box-sizing: border-box;
+    background: #ffffff;
+    border: 1px solid #dbe4ef;
+    border-radius: 12px;
+}
+
+.comparacion-wifi h2 {
+    color: #103B70;
+    margin-bottom: 15px;
+}
+
+.tabla-comparacion-contenedor {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.tabla-comparacion {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+.tabla-comparacion th,
+.tabla-comparacion td {
+    padding: 14px;
+    border-bottom: 1px solid #dbe4ef;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.tabla-comparacion th {
+    background: #103B70;
+    color: white;
+}
+
+.tabla-comparacion code {
+    font-size: 13px;
+}
+
+.tabla-comparacion button {
+    background: #1456A0;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin: 3px;
+    cursor: pointer;
+}
+
+.tabla-comparacion button:hover {
+    background: #103B70;
+}
+
+#mensaje-comparacion {
+    color: #1456A0;
+    font-weight: 600;
+    margin-top: 12px;
+}
+
+.nota-comparacion {
+    margin-top: 18px;
+    color: #64748b;
+    font-size: 13px;
+}

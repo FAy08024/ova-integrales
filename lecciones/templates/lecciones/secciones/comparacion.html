@@ -1,0 +1,117 @@
+
+<section class="comparacion-wifi">
+
+    <h2>Comparación de ubicaciones del router</h2>
+
+    <p>
+        Se presentan tres escenarios hipotéticos de ubicación
+        del router dentro de un salón de 10 × 8 metros.
+        Los resultados corresponden al modelo matemático propuesto.
+    </p>
+
+    <div class="tabla-comparacion-contenedor">
+        <table class="tabla-comparacion">
+
+            <thead>
+                <tr>
+                    <th>Ubicación</th>
+                    <th>Función S(x,y)</th>
+                    <th>Promedio espacial</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Centro (5,4)</td>
+                    <td>
+                        <code>-40-(x-5)**2-(y-4)**2</code>
+                    </td>
+                    <td>-53,67 dBm</td>
+                    <td>
+                        <button type="button"
+                                class="copiar-funcion"
+                                data-texto="-40-(x-5)**2-(y-4)**2">
+                            Copiar función
+                        </button>
+
+                        <button type="button"
+                                class="copiar-funcion"
+                                data-texto="∫_0^10 ∫_0^8 [-40-(x-5)^2-(y-4)^2] dy dx">
+                            Copiar integral
+                        </button>
+
+                        <button type="button"
+                                class="cargar-ejemplo"
+                                data-x="5" data-y="4">
+                            Cargar ejemplo
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Esquina (0,0)</td>
+                    <td>
+                        <code>-40-x**2-y**2</code>
+                    </td>
+                    <td>-94,67 dBm</td>
+                    <td>
+                        <button type="button"
+                                class="copiar-funcion"
+                                data-texto="-40-x**2-y**2">
+                            Copiar función
+                        </button>
+
+                        <button type="button"
+                                class="copiar-funcion"
+                                data-texto="∫_0^10 ∫_0^8 (-40-x^2-y^2) dy dx">
+                            Copiar integral
+                        </button>
+
+                        <button type="button"
+                                class="cargar-ejemplo"
+                                data-x="0" data-y="0">
+                            Cargar ejemplo
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Lateral (2,4)</td>
+                    <td>
+                        <code>-40-(x-2)**2-(y-4)**2</code>
+                    </td>
+                    <td>-62,67 dBm</td>
+                    <td>
+                        <button type="button"
+                                class="copiar-funcion"
+                                data-texto="-40-(x-2)**2-(y-4)**2">
+                            Copiar función
+                        </button>
+
+                        <button type="button"
+                                class="copiar-funcion"
+                                data-texto="∫_0^10 ∫_0^8 [-40-(x-2)^2-(y-4)^2] dy dx">
+                            Copiar integral
+                        </button>
+
+                        <button type="button"
+                                class="cargar-ejemplo"
+                                data-x="2" data-y="4">
+                            Cargar ejemplo
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p id="mensaje-comparacion" aria-live="polite"></p>
+
+    <p class="nota-comparacion">
+        Los resultados son estáticos y corresponden al modelo
+        hipotético sobre una superficie de 80 m².
+        No representan mediciones reales de cobertura Wi-Fi.
+    </p>
+
+</section>

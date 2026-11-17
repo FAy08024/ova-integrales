@@ -134,9 +134,10 @@ if (routerX && routerY) {
 
         const datos = new FormData(formulario);
 
+        
         const integral = {
-            tipo: datos.get("tipo"),
-            coordenadas: datos.get("coordenadas"),
+            tipo: "doble",
+            coordenadas: "cartesianas",
             funcion: datos.get("funcion"),
             orden: datos.get("orden"),
             x_min: datos.get("x_min"),
@@ -144,6 +145,7 @@ if (routerX && routerY) {
             y_min: datos.get("y_min"),
             y_max: datos.get("y_max")
         };
+
 
         boton.disabled = true;
 
