@@ -443,3 +443,83 @@ grafica-2d {
     margin: 8px 0;
     line-height: 1.6;
 }
+
+/* ==========================================
+   PANEL DE RESULTADOS HORIZONTAL
+========================================== */
+
+/* Ocupar el ancho de las dos columnas */
+.panel-simulador > .panel-resultados {
+    grid-column: 1 / -1;
+    min-width: 0;
+    background: #ffffff;
+    border: 1px solid #e1e8f0;
+    border-radius: 12px;
+    padding: 24px;
+}
+
+/* Distribuir resultados en tres columnas */
+.panel-resultados #resultado-integral {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    align-items: stretch;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+
+/* Encabezado principal */
+.panel-resultados #resultado-integral > h3 {
+    grid-column: 1 / -1;
+    margin: 0 0 8px;
+    color: #103b70;
+}
+
+/* Integral exacta, decimal y promedio */
+.panel-resultados #resultado-integral > p {
+    margin: 0;
+    padding: 18px;
+    background: #eaf3ff;
+    border-radius: 10px;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+/* Tarjetas de Fubini, tiempos y SciPy */
+.panel-resultados .resultado-fubini,
+.panel-resultados .resultado-tiempos,
+.panel-resultados .resultado-validacion {
+    margin: 0;
+    padding: 18px;
+    background: #f8fafc;
+    border: 1px solid #dbe4ef;
+    border-radius: 10px;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+/* Promedio espacial */
+.panel-resultados .promedio-wifi {
+    background: #dbeafe !important;
+    border-left: 4px solid #1456a0;
+    font-size: 1rem;
+}
+
+/* Dos columnas cuando el espacio es menor */
+@media (max-width: 1050px) {
+    .panel-resultados #resultado-integral {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Una columna en pantallas estrechas */
+@media (max-width: 700px) {
+    .panel-resultados #resultado-integral {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .panel-simulador > .panel-resultados {
+        padding: 16px;
+    }
+}

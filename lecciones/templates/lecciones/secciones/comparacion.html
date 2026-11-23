@@ -21,8 +21,10 @@
                     <th>Rangos de integración</th>
                     <th>Integral exacta</th>
                     <th>Promedio espacial</th>
-                    <th>Tiempo dy dx</th>
-                    <th>Tiempo dx dy</th>
+                    <th>Mediana dy dx</th>
+                    <th>Mediana dx dy</th>
+                    <th>Actual dy dx</th>
+                    <th>Actual dx dy</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -52,13 +54,11 @@
 
                     <td>-53,67 dBm</td>
 
-                    <td class="tiempo-dy-dx">
-                        61.7417 ms
-                    </td>
+                    <td class="mediana-dy-dx">61.7417 ms</td>
+                    <td class="mediana-dx-dy">49.0407 ms</td>
 
-                    <td class="tiempo-dx-dy">
-                        49.0407 ms
-                    </td>
+                    <td class="tiempo-dy-dx">Pendiente</td>
+                    <td class="tiempo-dx-dy">Pendiente</td>
 
                     <td>
                         <button
@@ -109,13 +109,15 @@
 
                     <td>-94,67 dBm</td>
 
-                    <td class="tiempo-dy-dx">
-                        42.5043 ms
-                    </td>
+                    
+                    <!-- MEDIANAS DE CINCO PRUEBAS -->
+                    <td class="mediana-dy-dx">42.5043 ms</td>
+                    <td class="mediana-dx-dy">36.0990 ms</td>
 
-                    <td class="tiempo-dx-dy">
-                        36.0990 ms
-                    </td>
+                    <!-- TIEMPOS DE LA ÚLTIMA EJECUCIÓN -->
+                    <td class="tiempo-dy-dx">Pendiente</td>
+                    <td class="tiempo-dx-dy">Pendiente</td>
+
 
                     <td>
                         <button
@@ -166,13 +168,15 @@
 
                     <td>-62,67 dBm</td>
 
-                    <td class="tiempo-dy-dx">
-                        71.3876 ms
-                    </td>
+                    
+                    <!-- MEDIANAS DE CINCO PRUEBAS -->
+                    <td class="mediana-dy-dx">71.3876 ms</td>
+                    <td class="mediana-dx-dy">61.7607 ms</td>
 
-                    <td class="tiempo-dx-dy">
-                        61.7607 ms
-                    </td>
+                    <!-- TIEMPOS DE LA ÚLTIMA EJECUCIÓN -->
+                    <td class="tiempo-dy-dx">Pendiente</td>
+                    <td class="tiempo-dx-dy">Pendiente</td>
+
 
                     <td>
                         <button
@@ -262,6 +266,18 @@
             por la caché de SymPy y las condiciones
             de ejecución, por lo que no demuestran
             una superioridad general de ese orden.
+        </p>
+        
+        <p>
+            Las medianas corresponden a cinco mediciones
+            realizadas previamente por escenario.
+
+            Los tiempos actuales corresponden a la última
+            ejecución de cada orden de integración y se
+            actualizan al presionar Calcular integral.
+
+            Los tiempos pueden variar por la caché de SymPy
+            y las condiciones del equipo.
         </p>
 
     </div>

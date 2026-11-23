@@ -1,3 +1,4 @@
+python manage.py test simulador -v 2
 git branch
 --- subir versiones
 git switch main

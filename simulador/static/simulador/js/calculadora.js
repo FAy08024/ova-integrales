@@ -1,4 +1,6 @@
-
+setTimeout(() => {
+    formulario.requestSubmit();
+}, 300);
 document.addEventListener("DOMContentLoaded", () => {
 
     const formulario = document.getElementById(
@@ -30,7 +32,19 @@ const coordenadasRouter = document.getElementById(
 );
 
 const campoFuncion = document.getElementById("funcion");
+let temporizadorCalculo = null;
 
+function calcularAutomaticamente() {
+    if (!formulario) {
+        return;
+    }
+
+    clearTimeout(temporizadorCalculo);
+
+    temporizadorCalculo = setTimeout(() => {
+        formulario.requestSubmit();
+    }, 400);
+}
 function actualizarRouter() {
 
     if (
@@ -62,8 +76,14 @@ function actualizarRouter() {
 
 // Ejecutar al mover cualquiera de los sliders
 if (routerX && routerY) {
-    routerX.addEventListener("input", actualizarRouter);
-    routerY.addEventListener("input", actualizarRouter);
+
+    function moverRouterTiempoReal() {
+        actualizarRouter();
+        calcularAutomaticamente();
+    }
+
+    routerX.addEventListener("input", moverRouterTiempoReal);
+    routerY.addEventListener("input", moverRouterTiempoReal);
 
     actualizarRouter();
 }
@@ -81,18 +101,22 @@ if (routerX && routerY) {
         contenedorResultado.append(h3, p);
     }
 
+    
     function dibujarGrafica(grafica) {
 
-        const contenedor = document.getElementById(
-            "grafica-2d"
-        );
+        const contenedor = document.getElementById("grafica-2d");
 
         if (!contenedor || typeof Plotly === "undefined") {
             console.warn("Plotly no está disponible.");
             return;
         }
 
-        Plotly.react(contenedor, [{
+        // Coordenadas actuales del router
+        const xRouter = Number(routerX.value);
+        const yRouter = Number(routerY.value);
+
+        // Distribución de la señal Wi-Fi
+        const mapaSenal = {
             x: grafica.x,
             y: grafica.y,
             z: grafica.z,
@@ -101,29 +125,65 @@ if (routerX && routerY) {
             contours: {
                 coloring: "heatmap",
                 showlines: true
+            },
+            colorbar: {
+                title: "Señal (dBm)"
+            },
+            name: "Señal Wi-Fi"
+        };
+
+        // Marcador de la posición del router
+        const marcadorRouter = {
+            x: [xRouter],
+            y: [yRouter],
+            type: "scatter",
+            mode: "markers+text",
+            text: [`Router (${xRouter}, ${yRouter})`],
+            textposition: "top right",
+            marker: {
+                color: "#dc3545",
+                size: 13,
+                line: {
+                color: "#ffffff",
+                width: 2
+                }
+            },
+            name: "Router",
+            hovertemplate:
+                "Router Wi-Fi<br>" +
+                "X: %{x} m<br>" +
+                "Y: %{y} m<extra></extra>"
+        };
+
+        Plotly.react(
+            contenedor,
+            [mapaSenal, marcadorRouter],
+            {
+                title: {
+                    text: "Distribución de señal Wi-Fi"
+                },
+                xaxis: {
+                    title: { text: "X (m)" }
+                },
+                yaxis: {
+                    title: { text: "Y (m)" },
+                    scaleanchor: "x"
+                },
+                margin: {
+                    l: 55,
+                    r: 35,
+                    t: 60,
+                 b: 55
+                },
+                showlegend: false
+            },
+            {
+                responsive: true,
+                displaylogo: false
             }
-        }], {
-            title: {
-                text: "Mapa de contornos"
-            },
-            xaxis: {
-                title: { text: "X" }
-            },
-            yaxis: {
-                title: { text: "Y" },
-                scaleanchor: "x"
-            },
-            margin: {
-                l: 55,
-                r: 35,
-                t: 60,
-                b: 55
-            }
-        }, {
-            responsive: true,
-            displaylogo: false
-        });
+        );
     }
+
 
     formulario.addEventListener("submit", async (evento) => {
         evento.preventDefault();
@@ -428,7 +488,8 @@ if (resultado.validacion) {
     
 formulario.addEventListener("reset", () => {
 
-    // Avisar al visualizador 3D que debe limpiarse
+    clearTimeout(temporizadorCalculo);
+
     document.dispatchEvent(
         new Event("integralLimpiada")
     );
